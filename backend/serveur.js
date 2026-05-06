@@ -13,10 +13,10 @@ app.use(express.json());
 
 const sequelize = require('./database');
 sequelize.sync({ force: false })
-    .then(() => console.log('Tables created successfully! ✨'))
+    .then(() => console.log('Tables created successfully! '))
     .catch(err => console.log('Error creating tables: ' + err));
 sequelize.authenticate()
-    .then(() => console.log('Connection to MariaDB established successfully! 🐘✅'))
+    .then(() => console.log('Connection to MariaDB established successfully! '))
     .catch(err => console.error('Unable to connect to MariaDB: ❌', err));
 
 app.post('/register', async (req, res) => {
@@ -55,5 +55,5 @@ app.post('/login',async (req,res)=>{
 app.get('/', (req, res) => { res.send('Users endpoint'); });
 module.exports = sequelize;
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port} 🚀`);
+    console.log(`Server is running on http://localhost:${port} `);
 });
