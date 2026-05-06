@@ -1,0 +1,13 @@
+# Node Modules (يغطي الـ client والـ backend مع بعضهم)
+**/node_modules/
+
+# Environment Variables
+.env
+backend/.env
+
+# Production builds
+client/dist/
+client/build/
+
+# IDEs
+.vscode/
