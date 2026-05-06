@@ -1,17 +1,14 @@
-import { Link } from 'react-router-dom'; // زدنا useNavigate باش نهزوه لصفحة أخرى
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
 
-  // 1. زدنا async هوني
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     try {
-      // 2. خزننا الـ fetch في response وزدنا await
       const response = await fetch('http://localhost:3000/login', {
         method: 'POST',
         headers: {
@@ -25,9 +22,6 @@ const Login = () => {
       if (response.ok) {
         console.log('Success:', data);
         alert("Welcome back! Login successful.");
-        
-        // 3. هوني تنجم تهزو للـ Dashboard
-        // navigate('/dashboard'); 
       } else {
         console.error('Server error:', data);
         alert("Error: " + (data.message || "Invalid credentials"));

@@ -3,12 +3,11 @@ import  { useState } from 'react';
 
 const Register = () => {
     const [formData, setFormData] = useState({
-        username: '', // ثبت هل الـ backend يستنى fullName أو username
+        username: '',
         email: '',
         password: ''
     });
 
-    // استعملنا async باش الكود يكون أنظف
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -26,7 +25,6 @@ const Register = () => {
             if (response.ok) {
                 console.log('Success:', data);
                 alert("Account created successfully!");
-                // تنجم هوني تهزو لصفحة الـ login
             } else {
                 console.error('Server error:', data);
                 alert("Error: " + (data.message || "Something went wrong"));
@@ -45,7 +43,6 @@ const Register = () => {
                     <p className="text-slate-400 text-sm">Join our platform and start building</p>
                 </div>
 
-                {/* ربطنا الـ handleSubmit بالـ Form */}
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     <div>
                         <label className="block text-slate-300 text-sm font-medium mb-2">Username</label>

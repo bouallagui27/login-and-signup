@@ -1,9 +1,9 @@
 const express = require('express');
-const { Sequelize, where } = require('sequelize'); // تبدلت من mongoose لـ sequelize
+const { Sequelize, where } = require('sequelize');
 const cors = require('cors');
 require('dotenv').config();
-const User = require('./models/usermodel'); // استيراد موديل المستخدم
-const bcrypt = require('bcrypt'); // لإدارة تشفير كلمات السر
+const User = require('./models/usermodel');
+const bcrypt = require('bcrypt');
 
 const app = express();
 const port = 3000;
@@ -11,22 +11,18 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-// 1. إعداد الربط مع MariaDB (XAMPP)
-const sequelize = require('./database'); // استيراد الربط الموحد
-// عمل "Sync" للموديلات مع قاعدة البيانات
-sequelize.sync({ force: false }) // force: false معناها ما تفسخش البيانات القديمة
+const sequelize = require('./database');
+sequelize.sync({ force: false })
     .then(() => console.log('Tables created successfully! ✨'))
     .catch(err => console.log('Error creating tables: ' + err));
-// 2. تجربة الاتصال بالقاعدة
 sequelize.authenticate()
     .then(() => console.log('Connection to MariaDB established successfully! 🐘✅'))
     .catch(err => console.error('Unable to connect to MariaDB: ❌', err));
 
-// الـ Routes متاعك (يقعدوا هما بيدهم توة)
 app.post('/register', async (req, res) => {
              try{
                 const { username, email, password } = req.body;
-                 const hashPassword = await bcrypt.hash(password, 10); // في الحقيقة لازم تشفره قبل ما تخزنه، مثلاً باستخدام bcrypt
+                 const hashPassword = await bcrypt.hash(password, 10);
                 const newuser = await User.create({ username, email, password: hashPassword });
                 res.status(201).json({ message: 'User registered successfully', user: newuser });
 
